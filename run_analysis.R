@@ -81,3 +81,13 @@ newnames <- tolower(sub("--", "-", newnames))
 newnames <- sub("magnitude-mean", "mean-magnitude", newnames)
 newnames <- sub("magnitude-stdev", "stdev-magnitude", newnames)
 colnames(full) <- newnames
+
+# reorder columns
+# this reorder puts each magnitude column next to its respective components
+# resulting order:
+#   subject-id
+#   activity
+#   time-domain columns, ordered alphabetically
+#   frequency-domain (Fourier transformed) columns, ordered alphabetically
+types <- c(1, 2, rep(3,40), rep(4,26))
+full <- full[order(types, colnames(full))]
