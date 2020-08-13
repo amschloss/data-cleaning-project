@@ -28,7 +28,8 @@ featureNames <- featureFile[, 2]
 # activity names
 activityLabels <- read.table("./UCI HAR Dataset/activity_labels.txt", sep=" ")
 
-# test/train -- these use the same logic, so encapsulate it
+# test/train data sets
+# these use the same logic, just in different folders, so encapsulate it
 loadData <- function(dataset = character()) {
     if(!(tolower(dataset) %in% c("test", "train"))) {
         stop("Can only use loadData with test or train")
@@ -55,14 +56,28 @@ loadData <- function(dataset = character()) {
     
     # read the subject IDs
     subjectIDs <- read.table(dataLocs["subject"])
-    colnames(subjectIDs) <- "subjectid"
+    colnames(subjectIDs) <- "subject-id"
     
-    # extract the values we want, then combine with metadata
+    # extract the columns we want, then combine with metadata
+    # we only want the columns containing means or standard deviations
     outDF <- outDF[, grep("mean[^F]|std", featureFile[, 2])]
     cbind(subjectIDs, activity, outDF)
 }
-
 full <- rbind(loadData("train"), loadData("test"))
-colnames(full) <- gsub("[()]", "", colnames(full))
-colnames(full) <- sub("tBody", "time-body-", colnames(full))
 
+# rename columns
+newnames <- colnames(full)
+newnames <- gsub("[()]", "", newnames)
+newnames <- sub("tBody", "time-body-", newnames)
+newnames <- sub("tGravity", "time-gravity-", newnames)
+newnames <- sub("Acc", "accelerometer-", newnames)
+newnames <- sub("fBodyBody", "fBody", newnames)
+newnames <- sub("fBody", "fourier-body-", newnames)
+newnames <- sub("Gyro", "gyroscope-", newnames)
+newnames <- sub("Mag", "-magnitude", newnames)
+newnames <- sub("std", "stdev", newnames)
+newnames <- sub("-Jerk", "Jerk", newnames)
+newnames <- tolower(sub("--", "-", newnames))
+newnames <- sub("magnitude-mean", "mean-magnitude", newnames)
+newnames <- sub("magnitude-stdev", "stdev-magnitude", newnames)
+colnames(full) <- newnames
