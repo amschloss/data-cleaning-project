@@ -42,11 +42,8 @@ loadData <- function(dataset = character()) {
                          paste0("/subject_", dataset, ".txt")))
     names(dataLocs) <- c("X", "y", "subject")
     
-    # read the base data and convert it to a matrix
-    dataLines <- readLines(dataLocs["X"])
-    baseMat <- as.numeric(sapply(strsplit(dataLines, " "), function(x) {
-        x[!is.na(x) & x != ""]}))
-    outDF <- as.data.frame(t(baseMat))
+    # read the base data into a dataframe
+    outDF <- read.table(dataLocs["X"], header = FALSE, sep = "")
     colnames(outDF) <- featureNames
     
     # read the data labels and convert to activity factors
@@ -56,7 +53,7 @@ loadData <- function(dataset = character()) {
     
     # read the subject IDs
     subjectIDs <- read.table(dataLocs["subject"])
-    colnames(subjectIDs) <- "subject-id"
+    colnames(subjectIDs) <- "subjectid"
     
     # extract the columns we want, then combine with metadata
     # we only want the columns containing means or standard deviations
@@ -85,9 +82,18 @@ colnames(full) <- newnames
 # reorder columns
 # this reorder puts each magnitude column next to its respective components
 # resulting order:
-#   subject-id
+#   subjectid
 #   activity
 #   time-domain columns, ordered alphabetically
 #   frequency-domain (Fourier transformed) columns, ordered alphabetically
 types <- c(1, 2, rep(3,40), rep(4,26))
-full <- full[order(types, colnames(full))]
+full <- full[, order(types, colnames(full))]
+
+# sort and export the full data set
+library(dplyr)
+full <- full %>% 
+    group_by(subjectid, activity) %>%
+    arrange(subjectid, activity)
+if(!file.exists("./ouptut")) {dir.create("./output")}
+write.csv(full, "./output/fullset.csv", row.names = FALSE)
+
