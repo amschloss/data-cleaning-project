@@ -18,4 +18,4 @@ Earlier versions of R may work okay, while earlier versions of `dplyr` might not
 
 ## Summary data file
 
-The final step of the code generates a summary file in CSV format. To load the summary in R, download the file and use `read.csv` to open it.
+The final step of the code generates a summary file in CSV format. To load the summary in R, download the file and use `read.csv` to open it. No parameters are necessary aside from the file name.
