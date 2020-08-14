@@ -1,7 +1,7 @@
 ######################
 # Coursera Project: Getting and Cleaning Data
 # Author: Adam Schloss
-# Date: 10 Aug 2020
+# Date: 10-14 Aug 2020
 ######################
 
 # Establish baseline file structure
@@ -97,3 +97,5 @@ full <- full %>%
 if(!file.exists("./ouptut")) {dir.create("./output")}
 write.csv(full, "./output/fullset.csv", row.names = FALSE)
 
+sums <- summarize(full, across(everything(), mean))
+write.csv(sums, "./output/summary.csv", row.names = FALSE)
