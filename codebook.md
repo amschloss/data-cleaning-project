@@ -94,11 +94,13 @@ All together, eight files were merged into a single data set.
 
 The problem specification requested that only estimates of mean or standard deviation be included in the tidied set. This condition means that the set of signal variables shrinks from 561 to 66.
 
-## Variable Naming Convention
+## Code Book
 
-The tidy data set includes 68 columns. The first, `subjectid`, lists the numeric study subject identifier. The second, `activity`, 
+The tidy data set includes 68 columns. The first, `subjectid`, lists the numeric study subject identifier. The second, `activity`, specifies the activity in which the subject was engaged for each observation. The remaining 66 columns comprise the signal variables.
 
-The signal variables have been named to be more understandable in the absence of a code book or other supporting documentation. Each variable is named using the following five-part convention, with each part separated by a `-` for ease of readability:
+### Signal variables and naming convention
+
+Each signal variable has been named to be more understandable in the absence of a code book or other supporting documentation. Each variable is named using the following five-part convention, with each part separated by a `-` for ease of readability:
 
 | Name part | Meaning | Allowable values |
 | --- | --- | --- |
@@ -107,6 +109,95 @@ The signal variables have been named to be more understandable in the absence of
 | source | What physical device did this signal come from? Was it differentiated in time? | `accelerometer`, `accelerometerjerk`, `gyroscope`, `gyroscopejerk` |
 | calculation | Which value was estimated for this signal? | `mean`, `stdev` |
 | component | Along which axis was this signal measured? Or, is this signal the magnitude of an X-Y-Z signal combination? | `magnitude`, `x`, `y`, `z` |
+
+As an example, consider columns 3-6 of the data set:
+
+* `time-body-accelerometer-mean-magnitude`
+* `time-body-accelerometer-mean-x`
+* `time-body-accelerometer-mean-y`
+* `time-body-accelerometer-mean-z`
+
+Each of these columns captures body movement measurements from the accelerometer in the time domain. The first of the four columns captures the mean of the magnitude of the acceleration, and the other three columns capture the mean of each of the axial components of the acceleration.
+
+For another example, consider columns 63-66:
+
+* `fourier-body-gyroscope-stdev-magnitude`
+* `fourier-body-gyroscope-stdev-x`
+* `fourier-body-gyroscope-stdev-y`
+* `fourier-body-gyroscope-stdev-z`
+
+Each of these columns captures body movement measurements from the gyroscope in the frequency domain.  The first of the four columns captures the standard deviation of the magnitude of the angular velocity, and the other three columns capture the mean of each of the axial components of the angular velocity.
+
+Following is the complete list of column names:
+
+* `subjectid`
+* `activity`
+* `time-body-accelerometer-mean-magnitude`
+* `time-body-accelerometer-mean-x`
+* `time-body-accelerometer-mean-y`
+* `time-body-accelerometer-mean-z`
+* `time-body-accelerometer-stdev-magnitude`
+* `time-body-accelerometer-stdev-x`
+* `time-body-accelerometer-stdev-y`
+* `time-body-accelerometer-stdev-z`
+* `time-body-accelerometerjerk-mean-magnitude`
+* `time-body-accelerometerjerk-mean-x`
+* `time-body-accelerometerjerk-mean-y`
+* `time-body-accelerometerjerk-mean-z`
+* `time-body-accelerometerjerk-stdev-magnitude`
+* `time-body-accelerometerjerk-stdev-x`
+* `time-body-accelerometerjerk-stdev-y`
+* `time-body-accelerometerjerk-stdev-z`
+* `time-body-gyroscope-mean-magnitude`
+* `time-body-gyroscope-mean-x`
+* `time-body-gyroscope-mean-y`
+* `time-body-gyroscope-mean-z`
+* `time-body-gyroscope-stdev-magnitude`
+* `time-body-gyroscope-stdev-x`
+* `time-body-gyroscope-stdev-y`
+* `time-body-gyroscope-stdev-z`
+* `time-body-gyroscopejerk-mean-magnitude`
+* `time-body-gyroscopejerk-mean-x`
+* `time-body-gyroscopejerk-mean-y`
+* `time-body-gyroscopejerk-mean-z`
+* `time-body-gyroscopejerk-stdev-magnitude`
+* `time-body-gyroscopejerk-stdev-x`
+* `time-body-gyroscopejerk-stdev-y`
+* `time-body-gyroscopejerk-stdev-z`
+* `time-gravity-accelerometer-mean-magnitude`
+* `time-gravity-accelerometer-mean-x`
+* `time-gravity-accelerometer-mean-y`
+* `time-gravity-accelerometer-mean-z`
+* `time-gravity-accelerometer-stdev-magnitude`
+* `time-gravity-accelerometer-stdev-x`
+* `time-gravity-accelerometer-stdev-y`
+* `time-gravity-accelerometer-stdev-z`
+* `fourier-body-accelerometer-mean-magnitude`
+* `fourier-body-accelerometer-mean-x`
+* `fourier-body-accelerometer-mean-y`
+* `fourier-body-accelerometer-mean-z`
+* `fourier-body-accelerometer-stdev-magnitude`
+* `fourier-body-accelerometer-stdev-x`
+* `fourier-body-accelerometer-stdev-y`
+* `fourier-body-accelerometer-stdev-z`
+* `fourier-body-accelerometerjerk-mean-magnitude`
+* `fourier-body-accelerometerjerk-mean-x`
+* `fourier-body-accelerometerjerk-mean-y`
+* `fourier-body-accelerometerjerk-mean-z`
+* `fourier-body-accelerometerjerk-stdev-magnitude`
+* `fourier-body-accelerometerjerk-stdev-x`
+* `fourier-body-accelerometerjerk-stdev-y`
+* `fourier-body-accelerometerjerk-stdev-z`
+* `fourier-body-gyroscope-mean-magnitude`
+* `fourier-body-gyroscope-mean-x`
+* `fourier-body-gyroscope-mean-y`
+* `fourier-body-gyroscope-mean-z`
+* `fourier-body-gyroscope-stdev-magnitude`
+* `fourier-body-gyroscope-stdev-x`
+* `fourier-body-gyroscope-stdev-y`
+* `fourier-body-gyroscope-stdev-z`
+* `fourier-body-gyroscopejerk-mean-magnitude`
+* `fourier-body-gyroscopejerk-stdev-magnitude`
 
 ## References
 
