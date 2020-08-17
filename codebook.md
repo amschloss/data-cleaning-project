@@ -92,7 +92,7 @@ All together, eight files were merged into a single data set.
 
 ### Variable selection
 
-The problem specification requested that only estimates of mean or standard deviation be included in the tidied set. This condition means that the set of signal variables shrinks from 561 to 66.
+The problem specification requested that only estimates of mean or standard deviation be included in the tidied set. This condition means that we are looking at the first two sets of variables specified above, `mean()` and `std()`; the set of signal variables therefore shrinks from 561 to 66.
 
 ## Code Book
 
@@ -198,6 +198,8 @@ Following is the complete list of column names:
 * `fourier-body-gyroscope-stdev-z`
 * `fourier-body-gyroscopejerk-mean-magnitude`
 * `fourier-body-gyroscopejerk-stdev-magnitude`
+
+As stated above, each measurement has been normalized to the range [-1, 1]. 
 
 ## References
 
